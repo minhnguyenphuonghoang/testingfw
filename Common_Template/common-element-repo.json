@@ -1,0 +1,359 @@
+{
+    "geSSOPage": {
+        "logo": {
+            "locatorType": "xpath",
+            "locatorValue": "/html/body/div[1]/div[1]/div/div[1]/img"
+        },
+        "username": {
+            "locatorType": "id",
+            "locatorValue": "username"
+        },
+        "password": {
+            "locatorType": "id",
+            "locatorValue": "password"
+        }
+    },
+
+    "loginPage": {
+        "username": {
+            "locatorType": "name",
+            "locatorValue": "username"
+        },
+        "password": {
+            "locatorType": "name",
+            "locatorValue": "password"
+        },
+        "signInButton": {
+            "locatorType": "css",
+            "locatorValue": ".island-button"
+        }
+    },
+    "landingPage": {
+        "assetTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Assets"
+        },
+
+        "casesTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Cases"
+        },
+        "closedCases": {
+            "locatorType": "linkText",
+            "locatorValue": "Closed Cases"
+        },
+        "dashboardTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Dashboard"
+        },
+
+        "analyticsCatalogTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Analytics Catalog"
+        },
+
+        "analysisTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Analysis"
+        },
+
+        "assetInstancesTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Asset Instances"
+        },
+        "logoutArrow": {
+            "locatorType": "css",
+            "locatorValue": ".fa.fa-angle-up.pxh-login__caret-icon"
+        },
+        "logoutButton": {
+            "locatorType": "linkText",
+            "locatorValue": "Sign Out"
+        },
+
+        "ooConfigDashboardTab": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='js-navigation-OO-Config-Dashboard.0']/a/div[1]"
+        }
+    },
+    "assetTenantPage": {
+        "tenantName": {
+            "locatorType": "css",
+            "locatorValue": ".subtitle.style-scope.faceplate-detail"
+        },
+        "customerInfo": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='asset-table']/div[1]/div[1]/div"
+        },
+        "tagClassNameTableHeader": {
+            "locatorType": "cssArray",
+            "value": {
+                "locatorValue": ".column-header.style-scope.asset-data-table",
+                "index": 0
+            }
+        },
+        "avidEnterpriseDiv": {
+            "locatorType": "cssContainingText",
+            "locatorCSS": ".flex__item.item-label.style-scope.px-context-browser",
+            "locatorValue": "AViD ENTERPRISE"
+        },
+        "scrollerDiv":{
+            "locatorType":"css",
+            "locatorValue":".scrollContent.style-scope.asset-data-table"
+        },
+        "initialDropdownArrow":{
+            "locatorType":"css",
+            "locatorValue":".style-scope.px-context-browser.ng-binding"
+        },
+        "tenantDiv":{
+            "locatorType": "xpath",
+            "locatorValue":"//*[@id='null']"
+        },
+        "tenantDivSelected":{
+            "locatorType": "css",
+            "locatorValue":".flex.flex--middle.selectable-item.style-scope.px-context-browser.selected"
+        },
+        "openButton":{
+            "locatorType": "css",
+            "locatorValue":".opener.btn.btn--small.btn--tertiary.openable.style-scope.px-context-browser"
+        },
+        "tagName": {
+            "locatorType": "cssArray",
+            "value": {
+                "locatorValue": ".style-scope.faceplate-detail",
+                "index": 12
+            }
+        }
+
+    },
+
+    "casesPage": {
+        "caseStatus": {
+            "locatorType": "cssArray",
+            "value": {
+                "locatorValue": ".inbox-item-status.ng-binding",
+                "index": 0
+            }
+        }
+    },
+
+    "wfvPage": {
+        "username": {
+            "locatorType": "id",
+            "locatorValue": "USER"
+        },
+        "password": {
+            "locatorType": "id",
+            "locatorValue": "PASSWORD"
+        },
+        "signInButton": {
+            "locatorType": "css",
+            "locatorValue": "table#entry tbody tr td input.Submit"
+        },
+        "geLogo": {
+            "locatorType": "css",
+            "locatorValue": "span.ge-logo"
+        },
+        "customer": {
+            "locatorType": "css",
+            "locatorValue": "#fleet_table > tbody > tr:nth-child(2) > td.sorting_1 > a"
+        },
+        "fleetTable": {
+            "locatorType": "id",
+            "locatorValue": "fleet_table"
+        },
+        "section": {
+            "locatorType": "id",
+            "locatorValue": "reliability"
+        },
+        "dashboardLink": {
+            "locatorType": "linkText",
+            "locatorValue": "Dashboard"
+        }
+    },
+    "angularjsHomepage": {
+        "logo": {
+            "locatorType": "xpath",
+            "locatorValue": "/html/body/div[1]/div[1]/div/div[1]/img"
+        },
+        "username": {
+            "locatorType": "id",
+            "locatorValue": "username"
+        },
+        "password": {
+            "locatorType": "id",
+            "locatorValue": "password"
+        }
+    },
+
+    "highChartsHomepage": {
+        "timeSeriesChart": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='demos']/div/div[2]/div[2]/a/div/div[1]/img"
+        },
+        "contextNameList": {
+            "locatorType": "css",
+            "locatorValue": ".flex__item.item-label.style-scope.px-context-browser"
+        }
+    },
+
+    "dashboardPage": {
+        "contextNameList": {
+            "locatorType": "css",
+            "locatorValue": ".flex__item.item-label.style-scope.px-context-browser"
+        },
+        "e2eEdisonEnterpriseDiv": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='/enterprises/9e227b06-2035-4af6-99a4-0f5a0870e4cb']/span"
+        },
+        "azPrescottSiteDiv": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='/sites/01461c1c-d720-4ec0-abcc-0d8bca31f71c']/span"
+        },
+        "azPrescottSiteDivCheck": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='/sites/01461c1c-d720-4ec0-abcc-0d8bca31f71c']/span"
+        },
+        "azPrescottSiteButton": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='/sites/01461c1c-d720-4ec0-abcc-0d8bca31f71c']/button"
+        },
+        "dropDownDashboardCheck": {
+            "locatorType": "css",
+            "locatorValue": ".epsilon.style-scope.deck-selector"
+        },
+        "dropDownDashboard": {
+            "locatorType": "css",
+            "locatorValue": ".dropdown-text.style-scope.deck-selector"
+        },
+        "newDashboardNavigation": {
+            "locatorType": "id",
+            "locatorValue": "HyN4twpw"
+        },
+
+        "cardDiv": {
+            "locatorType": "id",
+            "locatorValue": "hideWrapper"
+        },
+        "graphWidgetContainerLink": {
+            "locatorType": "id",
+            "locatorValue": "analysisNavigation"
+        },
+        "graphWidgetContainer": {
+            "locatorType": "cssArray",
+            "value": {
+                "locatorValue": ".u-m0.style-scope.px-chart",
+                "index": 0
+            }
+        },
+        "OOgraphWidgetContainer": {
+            "locatorType": "cssArray",
+            "value": {
+                "locatorValue": ".u-m0.style-scope.px-chart",
+                "index": 1
+            }
+        },
+        "chartHeader": {
+            "locatorType": "id",
+            "locatorValue": "toFields"
+        },
+        "graphNewTab": {
+            "locatorType": "css",
+            "locatorValue": ".external-link.button-container.style-scope.graph-widget.enable-button"
+        }
+    },
+
+    "highChartsDemopage": {
+        "timeSeriesClicked": {
+            "locatorType": "id",
+            "locatorValue": "container"
+        }
+    },
+    "analysisPage": {
+        "avidChartEnterprise": {
+            "locatorType": "cssContainingText",
+            "locatorCSS": ".flex__item.item-label.style-scope.px-context-browser",
+            "locatorValue": "AViD chart ENTERPRISE"
+        },
+        "avidChartSite": {
+            "locatorType": "cssContainingText",
+            "locatorCSS": ".flex__item.item-label.style-scope.px-context-browser",
+            "locatorValue": "AViD chart SITE"
+        },
+        "avidChartSegment": {
+            "locatorType": "cssContainingText",
+            "locatorCSS": ".flex__item.item-label.style-scope.px-context-browser",
+            "locatorValue": "AViD chart SEGMENT"
+        },
+        "avidChartAsset": {
+            "locatorType": "cssContainingText",
+            "locatorCSS": ".flex__item.item-label.style-scope.px-context-browser",
+            "locatorValue": "AViD chart Asset"
+        },
+        "avidChartAssetChild02": {
+            "locatorType": "cssContainingText",
+            "locatorCSS": ".flex__item.item-label.style-scope.px-context-browser",
+            "locatorValue": "AViD chart Asset Child02"
+        },
+        "avidChartAssetChild02Button": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='/assets/022b9d8d-a475-35e0-b2d9-0a2229700375']/button"
+        },
+        "fromDate": {
+            "locatorType": "css",
+            "locatorValue": "#fromDate > div > label > input"
+        },
+        "fromTime": {
+            "locatorType": "css",
+            "locatorValue": "#fromTime > div > label > input"
+        },
+        "toDate": {
+            "locatorType": "css",
+            "locatorValue": "#toDate > div > label > input"
+        },
+        "toTime": {
+            "locatorType": "css",
+            "locatorValue": "#toTime > div > label > input"
+        },
+        "svgCheck": {
+            "locatorType": "css",
+            "locatorValue": ".plotted-tag-header.style-scope.plotted-tag-list"
+        },
+        "submitButton": {
+            "locatorType": "id",
+            "locatorValue": "submitButton"
+        }
+
+
+    },
+
+    "OODashPage":{
+
+
+        "bpAssetEnterpriseForTest": {
+            "locatorType": "cssContainingText",
+            "locatorCSS": ".flex__item.item-label.style-scope.px-context-browser",
+            "locatorValue": "BP ASSET ENTERPRISE FOR TEST"
+        },
+        "bpCaNorthSite": {
+            "locatorType": "cssContainingText",
+            "locatorCSS": ".flex__item.item-label.style-scope.px-context-browser",
+            "locatorValue": "BP-CA-NORTH-SITE"
+        },
+        "bpCaNorthSiteButton": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='/sites/afaf7f44-4215-3cbf-9add-468be9c513f3']/button"
+        },
+        "menuDropDownArrow": {
+            "locatorType": "css",
+            "locatorValue": ".fa.fa-caret-down.style-scope.deck-selector"
+        },
+        "ooDashboard": {
+            "locatorType": "id",
+            "locatorValue": "SkQzGH-Y"
+        }
+
+
+    }
+
+
+}

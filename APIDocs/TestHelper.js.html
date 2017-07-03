@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: TestHelper.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: TestHelper.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Copyright (c) 2013 - 2014 GE Global Research. All rights reserved.
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+
+(function () {
+
+	'use strict';
+
+	/**
+	 * Creates new TestHelper
+	 * @class TestHelper
+	 */
+	var TestHelper = function () {
+		var chai = require('chai');
+		global.expect = chai.expect;
+		global.should = chai.should();
+		global.assert = chai.assert;
+		chai.use(require('chai-as-promised'));
+		var logger = require('./Logger.js');
+		var EC = protractor.ExpectedConditions;
+		var elementManager;
+		var waitTime = 60000;
+
+		return {
+			// To generate a random String name
+			getRandomString: function () {
+				var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+				var string_length = 8;
+				var randomstring = '';
+				for (var i = 0; i &lt; string_length; i++) {
+					var rnum = Math.floor(Math.random() * chars.length);
+					randomstring += chars.substring(rnum, rnum + 1);
+				}
+
+				return randomstring;
+			},
+
+			/**
+			 * Assert if expected is included
+			 * @method assertInclude
+			 * @param {object} actual
+			 * @param {object} expected
+			 * @param callbackOnError
+			 * @returns {*}
+			 */
+
+			assertInclude: function (actual, expected, callbackOnError) {
+				var error;
+				try {
+					assert.include(actual, expected);
+				} catch (e) {
+					error = e;
+					if (callbackOnError) {
+						return error
+					}
+				}
+				return error;
+			},
+
+			/**
+			 * Assert if expected is equal to actual
+			 * @param actual
+			 * @param expected
+			 * @param callbackOnError
+			 * @returns {promise}
+			 */
+			assertEqual: function (actual, expected, callbackOnError) {
+				var error;
+				try {
+					logger.info('Asserting if actual: ' + actual + " is equal to expected: "+expected+"\n");
+					assert.equal(actual, expected);
+				} catch (e) {
+					error = e;
+					logger.info('Error in assertEqual: ' + error + "\n");
+					if (callbackOnError) {
+						callbackOnError(error)
+					}
+				}
+				return error;
+
+			},
+
+			/**
+			 * Assert if something is True
+			 * @param promise
+			 * @param callbackOnError
+			 * @returns {promise}
+			 */
+			assertTrue: function (promise, callbackOnError) {
+				var error;
+				try {
+					assert.isTrue(promise);
+				} catch (e) {
+					error = e;
+					logger.info('Error in assertTrue: ' + error + "\n");
+					if (callbackOnError) {
+						callbackOnError(error)
+					}
+				}
+				return error;
+
+			},
+			/**
+			 * Waits for all the angular content to load on the page
+			 * @method waitForAngular
+			 */
+			waitForAngular: function () {
+				try {
+					browser.waitForAngular();
+				} catch (e) {
+					console.log("Ignoring Error ", e);
+					logger.info("Ignoring Error " + e + "\n");
+				}
+			},
+			/**
+			 * An expectation to check if element is present on the DOM of a page and visible
+			 * @method isElementPresent
+			 * @param {String} page
+			 * @param {string} elementName
+			 */
+			/*
+			 isElementPresent: function (page, element) {
+			 var locator = elementManager.findElement(page, element)
+			 return browser.wait(EC.visibilityOf(locator), 180000).then(
+			 function () {
+			 logger.info("Found " + element + "!\n");
+			 });
+			 },
+			 */
+			isElementPresent: function (page, ele) {
+				var locator = elementManager.findElement(page, ele)
+				return browser.wait(EC.visibilityOf(locator), waitTime).then(
+					function () {
+						logger.info("Found " + ele + "!\n");
+					});
+			},
+
+			/**
+			 * An Expectation for checking an element is visible and enabled such that you can click it.
+			 * @method elementToBeClickable
+			 * @param {String} page
+			 * @param {string} elementName
+			 * @returns {promise}
+			 */
+			/*elementToBeClickable: function (page, element) {
+			 var locator = elementManager.findElement(page, element);
+
+			 return browser.wait(function () {
+			 return locator.click().then(
+			 function () {
+			 logger.info("Clicked on" + element + "!\n");
+			 return true;
+			 },
+			 function () {
+			 logger.info(element + " Not Clickable!\n");
+			 return false;
+			 });
+			 }, waitTime);
+			 },*/
+
+			elementToBeClickable: function (page, ele) {
+				var locator = elementManager.findElement(page, ele);
+
+				return browser.wait(function () {
+					return locator.click().then(
+						function () {
+							logger.info("Clicked on" + ele + "!\n");
+							return true;
+						},
+						function () {
+							logger.info(ele + " Not Clickable!\n");
+							return false;
+						});
+				}, waitTime);
+			},
+
+			/**
+			 * Expect an alert to be present.
+			 * @method alertIsPresent
+			 * @returns {promise}
+			 */
+			alertsIsPresent: function () {
+
+				return browser.wait(EC.alertIsPresent(), waitTime);
+			},
+			/**
+			 * An expectation for checking if the given text is present in the element.
+			 * @method textToBePresentInElement
+			 * @param {String} page
+			 * @param {string} elementName
+			 * @param {string} text
+			 * @returns {promise}
+			 */
+			textToBePresentInElement: function (page, element, text) {
+				var locator = elementManager.findElement(page, element)
+				return browser.wait(EC.textToBePresentInElement(locator, text), waitTime).then(
+					function () {
+						logger.info(text + " is present in " + element + "!\n");
+					},
+					function () {
+						logger.info(text + " is NOT present in " + element + "!\n");
+						return false;
+					});
+			},
+
+			/**
+			 * An expectation for checking if the given text is present in the element’s value.
+			 * @method textToBePresentInElementValue
+			 * @param {String} page
+			 * @param {string} elementName
+			 * @param {string} text
+			 * @returns {promise}
+			 */
+			textToBePresentInElementValue: function (page, element, text) {
+				var locator = elementManager.findElement(page, element);
+				return browser.wait(EC.textToBePresentInElementValue(locator, text), waitTime).then(
+					function () {
+						logger.info(text + " is present in " + element + "'s value!\n");
+					},
+					function () {
+						logger.info(text + " is NOT present in " + element + "'s value!\n");
+						return false;
+					});
+			},
+
+			/**
+			 * @method elementToBeSelected
+			 * @param {string} elementName
+			 * @returns {promise}
+			 */
+			elementToBeSelected: function (page, element) {
+				var locator = elementManager.findElement(page, element);
+				return browser.wait(EC.elementToBeSelected(locator), waitTime).then(
+					function () {
+						logger.info(element + " is selected!\n");
+					},
+					function () {
+						logger.info(element + " is NOT selected!\n");
+						return false;
+					});
+			},
+
+			/**
+			 * An expectation for checking that the title contains a case-sensitive substring.
+			 * @method titleContains
+			 * @param {string} text
+			 * @returns {promise}
+			 */
+			titleContains: function (text) {
+				return browser.wait(EC.titleContains(text), waitTime);
+			},
+
+			/**
+			 * An expectation for checking the title of a page.
+			 * @method titleIs
+			 * @param {string} text
+			 * @returns {promise}
+			 */
+			titleIs: function (text) {
+
+				return browser.wait(EC.titleIs(text), waitTime);
+			},
+
+			/**
+			 * Sets the element manager
+			 * @method setElementManager
+			 * @param {Object} eM
+			 */
+			setElementManager: function (eM) {
+				elementManager = eM;
+			},
+
+			/**
+			 * Gets the element manager
+			 * @method getElementManager
+			 * @return {Object}
+			 */
+			getElementManager: function () {
+				return elementManager;
+			},
+
+		}
+	}
+
+	module.exports = new TestHelper();
+
+}())
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="HighChart.html">HighChart</a></li><li><a href="RestHelper.html">RestHelper</a></li><li><a href="TestHelper.html">TestHelper</a></li></ul><h3>Global</h3><ul><li><a href="global.html#alertIsPresent">alertIsPresent</a></li><li><a href="global.html#assertEqual">assertEqual</a></li><li><a href="global.html#assertInclude">assertInclude</a></li><li><a href="global.html#assertTrue">assertTrue</a></li><li><a href="global.html#elementToBeClickable">elementToBeClickable</a></li><li><a href="global.html#elementToBeSelected">elementToBeSelected</a></li><li><a href="global.html#executeDeleteRequest">executeDeleteRequest</a></li><li><a href="global.html#executeGetRequest">executeGetRequest</a></li><li><a href="global.html#executePostRequest">executePostRequest</a></li><li><a href="global.html#getAccessToken">getAccessToken</a></li><li><a href="global.html#getAxisLabels">getAxisLabels</a></li><li><a href="global.html#getAxisText">getAxisText</a></li><li><a href="global.html#getAxisTextByIndex">getAxisTextByIndex</a></li><li><a href="global.html#getContainer">getContainer</a></li><li><a href="global.html#getElementManager">getElementManager</a></li><li><a href="global.html#getLegendsFromSection">getLegendsFromSection</a></li><li><a href="global.html#getLegendsFromSVG">getLegendsFromSVG</a></li><li><a href="global.html#getSVG">getSVG</a></li><li><a href="global.html#getXaxisLabels">getXaxisLabels</a></li><li><a href="global.html#getXaxisText">getXaxisText</a></li><li><a href="global.html#getYaxisLabels">getYaxisLabels</a></li><li><a href="global.html#getYaxisText">getYaxisText</a></li><li><a href="global.html#isChartDisplayed">isChartDisplayed</a></li><li><a href="global.html#isElementPresent">isElementPresent</a></li><li><a href="global.html#setContianer">setContianer</a></li><li><a href="global.html#setElementManager">setElementManager</a></li><li><a href="global.html#setSVG">setSVG</a></li><li><a href="global.html#textToBePresentInElement">textToBePresentInElement</a></li><li><a href="global.html#textToBePresentInElementValue">textToBePresentInElementValue</a></li><li><a href="global.html#titleContains">titleContains</a></li><li><a href="global.html#titleIs">titleIs</a></li><li><a href="global.html#waitForAngular">waitForAngular</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jun 16 2016 13:54:33 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

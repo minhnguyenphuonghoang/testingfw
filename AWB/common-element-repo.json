@@ -1,0 +1,63 @@
+{
+    "loginPage": {
+        "username": {
+            "locatorType": "xpath",
+            "locatorValue": "//input[@name='username']"
+        },
+        "password": {
+            "locatorType": "xpath",
+            "locatorValue": "//input[@name='password']"
+        },
+        "signInButton": {
+            "locatorType": "css",
+            "locatorValue": "body > div.predix-uaa__wrap > div.predix-uaa__content > div > form > input.island-button"
+        },
+         "errorMsg": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[contains(text(),'Unable to verify email or password. Please try again.')]"
+        }
+    },
+    "tenantPage": {
+        "tenantName": {
+            "locatorType": "id",
+            "locatorValue": "tenantName"
+        },
+        "signinButton": {
+            "locatorType": "xpath",
+            "locatorValue": "//button[contains(.,'Sign In')]"
+        }
+    },
+
+     "homePage": {
+        "userName": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='userNameButton']/i[2]"
+        },
+        "logoutButton": {
+            "locatorType": "xpath",
+            "locatorValue": "//a[contains(.,'Sign Out')]"
+        },
+         "searchIcon": {
+            "locatorType": "xpath",
+            "locatorValue": "//span[contains(.,'Search')]"
+        }
+        
+    },
+
+     "searchPage": {
+        "queryField": {
+            "locatorType": "id",
+            "locatorValue": "node_name"
+        },
+        "queryButton": {
+            "locatorType": "xpath",
+            "locatorValue": "//button[contains(.,'Run Query')]"
+        },
+         "tableResult": {
+            "locatorType": "id",
+            "locatorValue": "scrollBodyTableContainer"
+        }
+        
+    }
+  
+}

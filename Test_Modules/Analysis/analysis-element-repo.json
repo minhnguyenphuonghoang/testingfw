@@ -1,0 +1,56 @@
+{
+    "geSSOPage": {
+        "logo": {
+            "locatorType": "xpath",
+            "locatorValue": "/html/body/div[1]/div[1]/div/div[1]/img"
+        },
+        "username": {
+            "locatorType": "id",
+            "locatorValue": "username"
+        },
+        "password": {
+            "locatorType": "id",
+            "locatorValue": "password"
+        }
+    },
+
+    "loginPage": {
+        "username": {
+            "locatorType": "name",
+            "locatorValue": "username"
+        },
+        "password": {
+            "locatorType": "name",
+            "locatorValue": "password"
+        },
+        "signInButton": {
+            "locatorType": "css",
+            "locatorValue": ".island-button"
+        }
+    },
+    "landingPage": {
+        "assetTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Assets"
+        },
+
+        "analyticsCatalogTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Analytics Catalog"
+        },
+
+        "assetInstancesTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Asset Instances"
+        },
+        "logoutArrow": {
+            "locatorType": "css",
+            "locatorValue": ".fa.fa-angle-up.pxh-login__caret-icon"
+        },
+        "logoutButton": {
+            "locatorType": "linkText",
+            "locatorValue": "Sign Out"
+        }
+    }
+
+}

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Highchart.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Highchart.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Copyright (c) 2013 - 2014 GE Global Research. All rights reserved.
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ *
+ * @author: 212329933
+ */
+
+(function () {
+
+	'use strict';
+
+	/**
+	 * Creates new HighChart
+	 * @class HighChart
+	 */
+	var HighChart = function () {
+		// reference to chart element
+		var helper = require('./TestHelper');
+		var logger = require('./Logger.js');
+		var section, container, svg;
+		var EC = protractor.ExpectedConditions;
+
+		return {
+
+			setChartElements: function (sectionElement) {
+				section = sectionElement;
+				container = section.element(by.css('div.highcharts-container'));
+				svg = container.element(by.css('svg'));
+
+				logger.info('chart elements set for section '+sectionElement);
+			},
+
+			/**
+			 * set svg element
+			 * @method setSVG
+			 * @param {object} svgElement
+			 */
+			setSVG: function (svgElement) {
+				svg = svgElement;
+				logger.info('svg element set '+svgElement);
+			},
+
+			/**
+			 * get svg element
+			 * @method getSVG
+			 * @return {object} svg
+			 */
+			getSVG: function () {
+				return svg;
+			},
+
+			/**
+			 * set container element
+			 * @method setContianer
+			 * @param {object} containerElement
+			 */
+			setContainer: function (containerElement) {
+				container = containerElement;
+				logger.info('container set '+containerElement);
+			},
+
+			/**
+			 * get container element
+			 * @method getContainer
+			 * @return {object} container
+			 */
+			getContainer: function () {
+				return container;
+			},
+
+			/**
+			 * check if chart is displayed
+			 * @method isChartDisplayed
+			 * @return {boolean}
+			 */
+			isChartDisplayed: function () {
+				return svg.isPresent();
+			},
+
+			/**
+			 * get text displayed in x-axis or y-axis
+			 * @method getAxisText
+			 * @param {int} index
+			 * @return {string}
+			 */
+			getAxisText: function (index) {
+				logger.info('get axis text using index '+index);
+				return this.getAxisTextByIndex(index);
+			},
+
+			/**
+			 * get text displayed in x-axis
+			 * @method getXaxisText
+			 * @return {string}
+			 */
+			getXaxisText: function () {
+				logger.info('get x-axis text');
+				return this.getAxisTextByIndex(1);
+			},
+
+			/**
+			 * get text displayed in y-axis
+			 * @method getYaxisText
+			 * @return {string}
+			 */
+			getYaxisText: function () {
+				logger.info('get y-axis text');
+				return this.getAxisTextByIndex(2);
+			},
+
+			/**
+			 * get text displayed in axis
+			 * @method getAxisTextByIndex
+			 * @param {int} index (1 for x-axis, 2 for y-axis)
+			 * @return {string}
+			 */
+			getAxisTextByIndex: function (index) {
+				logger.info('get axis text by index '+index);
+				var deferred = protractor.promise.defer();
+				index = index - 1;
+
+				this.waitForChartElement('svg g.highcharts-axis');
+				svg = section.element(by.css('svg'));
+				svg.all(by.css('g.highcharts-axis')).filter(function (li, id) {
+					return id === index;
+				}).then(function (texts) {
+					if (texts.length === 1) {
+						texts[0].getText().then(function (text) {
+							deferred.fulfill(text);
+						})
+					} else {
+						deferred.reject(new Error('axis text not found for given index!'));
+						logger.info('axis text not found for given index!');
+					}
+				})
+
+				return deferred.promise;
+			},
+
+			/**
+			 * get labels displayed in x-axis
+			 * @method getXaxisLabels
+			 * @return {list}
+			 */
+			getXaxisLabels: function () {
+				logger.info('get x-axis labels');
+				return this.getAxisLabels('x');
+			},
+
+			/**
+			 * get labels displayed in y-axis
+			 * @method getYaxisLabels
+			 * @return {list}
+			 */
+			getYaxisLabels: function () {
+				logger.info('get y-axis labels');
+				return this.getAxisLabels('y');
+			},
+
+			/**
+			 * get labels displayed in x-axis or y-axis
+			 * @param axis
+			 * @method getAxisLabels
+			 * @return {list}
+			 */
+			getAxisLabels: function (axis, index) {
+				logger.info('get axis labels');
+				var deferred = protractor.promise.defer();
+				this.waitForChartElement('svg g.highcharts-axis-labels');
+
+				if (index === undefined)
+					index = 0;
+				else
+					index = index - 1;
+
+				//svg = section.element(by.css('svg'));
+				var txtList = svg.all(by.css('svg g.highcharts-' + axis + 'axis-labels')).get(index);
+
+				txtList.all(by.css('text')).then(function (list) {
+					var items = new Array();
+					list.forEach(function (li, index) {
+						li.getText().then(function (text) {
+							if (text.trim().length > 0) {
+								items.push(text);
+							}
+						})
+					})
+
+					return items;
+				}).then(function (items) {
+					if (items.length > 0)
+						deferred.fulfill(items);
+					else {
+						deferred.reject(new Error(axis + '-axis labels list is empty!'));
+						logger.info(axis + '-axis labels list is empty!');
+					}
+				})
+
+				return deferred.promise;
+			},
+
+			/**
+			 * get legends displayed in section (outside svg element)
+			 * @method getLegendsFromSection
+			 * @return {list}
+			 */
+			getLegendsFromSection: function () {
+				logger.info('get legends from section div');
+				var deferred = protractor.promise.defer();
+				this.waitForChartElement('div.highcharts-legend-item');
+
+				section.all(by.css('div.highcharts-legend-item')).then(function (list) {
+					var items = new Array();
+					list.forEach(function (item, index) {
+						item.getText().then(function (text) {
+							items.push(text);
+						})
+					})
+
+					return items;
+				}).then(function (legends) {
+					if (legends.length > 0)
+						deferred.fulfill(legends);
+					else
+						deferred.reject('No legends!');
+				})
+
+				return deferred.promise;
+			},
+
+			/**
+			 * get legends displayed in svg
+			 * @method getLegendsFromSVG
+			 * @return {list}
+			 */
+			getLegendsFromSVG: function () {
+				logger.info('get legends from section svg');
+				var deferred = protractor.promise.defer();
+				this.waitForChartElement('svg g.highcharts-legend-item');
+				//svg = section.element(by.css('svg'));
+
+				svg.all(by.css('g.highcharts-legend-item')).then(function (list) {
+					var items = new Array();
+					list.forEach(function (item, index) {
+						item.getText().then(function (text) {
+							items.push(text);
+							deferred.fulfill(items);
+						})
+					})
+				})
+
+				return deferred.promise;
+			},
+
+			waitForChartElement: function (element) {
+				browser.wait(EC.presenceOf(section.element(by.css(element))), 60000);
+			}
+		}
+	}
+
+	module.exports = new HighChart();
+}())
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="HighChart.html">HighChart</a></li><li><a href="RestHelper.html">RestHelper</a></li><li><a href="TestHelper.html">TestHelper</a></li></ul><h3>Global</h3><ul><li><a href="global.html#alertIsPresent">alertIsPresent</a></li><li><a href="global.html#assertEqual">assertEqual</a></li><li><a href="global.html#assertInclude">assertInclude</a></li><li><a href="global.html#assertTrue">assertTrue</a></li><li><a href="global.html#elementToBeClickable">elementToBeClickable</a></li><li><a href="global.html#elementToBeSelected">elementToBeSelected</a></li><li><a href="global.html#executeDeleteRequest">executeDeleteRequest</a></li><li><a href="global.html#executeGetRequest">executeGetRequest</a></li><li><a href="global.html#executePostRequest">executePostRequest</a></li><li><a href="global.html#getAccessToken">getAccessToken</a></li><li><a href="global.html#getAxisLabels">getAxisLabels</a></li><li><a href="global.html#getAxisText">getAxisText</a></li><li><a href="global.html#getAxisTextByIndex">getAxisTextByIndex</a></li><li><a href="global.html#getContainer">getContainer</a></li><li><a href="global.html#getElementManager">getElementManager</a></li><li><a href="global.html#getLegendsFromSection">getLegendsFromSection</a></li><li><a href="global.html#getLegendsFromSVG">getLegendsFromSVG</a></li><li><a href="global.html#getSVG">getSVG</a></li><li><a href="global.html#getXaxisLabels">getXaxisLabels</a></li><li><a href="global.html#getXaxisText">getXaxisText</a></li><li><a href="global.html#getYaxisLabels">getYaxisLabels</a></li><li><a href="global.html#getYaxisText">getYaxisText</a></li><li><a href="global.html#isChartDisplayed">isChartDisplayed</a></li><li><a href="global.html#isElementPresent">isElementPresent</a></li><li><a href="global.html#setContianer">setContianer</a></li><li><a href="global.html#setElementManager">setElementManager</a></li><li><a href="global.html#setSVG">setSVG</a></li><li><a href="global.html#textToBePresentInElement">textToBePresentInElement</a></li><li><a href="global.html#textToBePresentInElementValue">textToBePresentInElementValue</a></li><li><a href="global.html#titleContains">titleContains</a></li><li><a href="global.html#titleIs">titleIs</a></li><li><a href="global.html#waitForAngular">waitForAngular</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jun 16 2016 13:54:33 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

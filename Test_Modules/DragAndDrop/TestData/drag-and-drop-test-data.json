@@ -1,0 +1,8 @@
+{
+	"data": {
+		"xlabels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+		"ylabels": ["-5","0", "5", "10", "15", "20", "25", "30"],
+		"ytext": "Temperature",
+		"legends": ["Tokyo", "New York", "Berlin", "London"]
+	}
+}

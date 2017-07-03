@@ -1,0 +1,15 @@
+{
+	"homePage": {
+		"lineChartLink": {
+			"locatorType": "xpath",
+			"locatorValue": "//*[@id='demos']/div/div[2]/div[7]/a/div/div[1]/img"
+		}
+	},
+
+	"lineChartPage": {
+		"lineChartContainer": {
+			"locatorType": "id",
+			"locatorValue": "container"
+		}
+	}
+}

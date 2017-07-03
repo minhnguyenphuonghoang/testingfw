@@ -1,0 +1,31 @@
+{
+  "type": "User",
+  "active": true,
+  "username": "tobedeleted",
+  "firstName": "M&D Manager",
+  "lastName": "APM",
+  "password":"tobedeleted",
+  "eulaAccepted": false,
+  "identityProvider": {
+    "uuid": "7fd4b91593c34c0e8f4bac2084131a79"
+  },
+  "emails": [
+    {
+      "type": "Email",
+      "primary": true,
+      "email": "some.thing@ge.com"
+    }
+  ],
+  "subjectAssignments": [
+    {
+      "role": {
+        "name": "M&D Manager"
+      },
+      "resource": {
+        "type": "EntityResource",
+        "entityUuid": "/enterprises/28c5bb16-3d5d-4095-a6bb-79de787b62f3"
+      },
+      "active": true
+    }
+  ]
+}

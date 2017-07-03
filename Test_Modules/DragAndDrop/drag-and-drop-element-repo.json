@@ -1,0 +1,16 @@
+{
+	"basics": {
+		"sectionA": {
+			"locatorType": "css",
+			"locatorValue": "#columns-full > div:nth-child(1)"
+		},
+		"sectionB": {
+			"locatorType": "css",
+			"locatorValue": "#columns-full > div:nth-child(2)"
+		},
+		"countA": {
+			"locatorType": "css",
+			"locatorValue": "#columns-full > div:nth-child(2) > div"
+		}
+	}
+}

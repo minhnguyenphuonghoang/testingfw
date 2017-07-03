@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: RestHelper.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: RestHelper.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Copyright (c) 2013 - 2014 GE Global Research. All rights reserved.
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+
+(function () {
+
+var request = require('superagent');
+
+    /**
+     * Creates new RestHelper
+     * @class RestHelper
+     */
+var RestHelper = function () {
+
+    var logger = require('./Logger.js');
+
+    return {
+        /**
+         * Perform a get request
+         * @param url         the end point to perform a get request on
+         * @param headers     http headers
+         * @param callback    callback on error and http response
+         */
+        executeGetRequest: function (url, headers, callback) {
+            logger.info('Executed get request :' + url);
+            request.get(url)
+                .set(headers)
+                .end(function (err, res) {
+                    if (err) throw err;
+                    if (res.ok) {
+                        //logger.info(JSON.stringify(res.body));
+                        logger.info("Get response status=" + res.status);
+                        if (typeof callback === "function") {
+                            callback(err, res);
+                        }
+                    }
+                });
+        },
+
+        /**
+         * Perform a post request
+         * @param url       the end point to perform a post request
+         * @param headers   http headers
+         * @param body      post request body object
+         * @param callback  callback on error and http response
+         */
+        executePostRequest: function (url, headers, body, callback) {
+            logger.info('Executed post request : ' + url);
+            request.post(url)
+                .type('form')
+                .send(body)
+                .set(headers)
+                .end(function (err, res) {
+                    if (err) throw err;
+                    if (res.ok) {
+                        logger.info("Post response status=" + res.status);
+                        //logger.info( JSON.stringify(res.body));
+                        if (typeof callback === "function") {
+                            callback(err, res);
+                        }
+                    }
+                });
+        },
+
+        /**
+         * Perform a delete request
+         * @param url      the end point to perform a delete request
+         * @param headers  http headers
+         * @param callback callback on error and http response
+         */
+        executeDeleteRequest: function (url, headers, callback) {
+            logger.info('Executed delete request :' + url);
+            request.del(url)
+                .set(headers)
+                .end(function (err, res) {
+                    if (err) throw err;
+                    if (res.ok) {
+                        logger.info("Delete response status=" + res.status);
+                        //logger.info( JSON.stringify(res.body));
+                        if (typeof callback === "function") {
+                            callback(err, res);
+                        }
+                    }
+                });
+        },
+
+        /**
+         * An util to get the access_token
+         * @param url       the url to get the access token
+         * @param headers   http headers
+         * @param body      post request body
+         * @param callback
+         */
+        getAccessToken: function(url, headers, body, callback){
+            logger.info('Get access token url :' + url);
+            request.post(url)
+                .type('form')
+                .send(body)
+                .set(headers)
+                .end(function (err, res) {
+                    if (err) throw err;
+                    if (res.ok) {
+                        logger.info('Executed getAccessToken : ' + JSON.stringify(res.body));
+                        var obj = JSON.parse(JSON.stringify(res.body));
+                        //logger.info("token=" + obj.access_token);
+                        if (typeof callback === "function") {
+                            callback(err, obj.access_token);
+                        }
+                    }
+                });
+            }
+        };
+    }
+    module.exports = new RestHelper();
+}())
+
+
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="HighChart.html">HighChart</a></li><li><a href="RestHelper.html">RestHelper</a></li><li><a href="TestHelper.html">TestHelper</a></li></ul><h3>Global</h3><ul><li><a href="global.html#alertIsPresent">alertIsPresent</a></li><li><a href="global.html#assertEqual">assertEqual</a></li><li><a href="global.html#assertInclude">assertInclude</a></li><li><a href="global.html#assertTrue">assertTrue</a></li><li><a href="global.html#elementToBeClickable">elementToBeClickable</a></li><li><a href="global.html#elementToBeSelected">elementToBeSelected</a></li><li><a href="global.html#executeDeleteRequest">executeDeleteRequest</a></li><li><a href="global.html#executeGetRequest">executeGetRequest</a></li><li><a href="global.html#executePostRequest">executePostRequest</a></li><li><a href="global.html#getAccessToken">getAccessToken</a></li><li><a href="global.html#getAxisLabels">getAxisLabels</a></li><li><a href="global.html#getAxisText">getAxisText</a></li><li><a href="global.html#getAxisTextByIndex">getAxisTextByIndex</a></li><li><a href="global.html#getContainer">getContainer</a></li><li><a href="global.html#getElementManager">getElementManager</a></li><li><a href="global.html#getLegendsFromSection">getLegendsFromSection</a></li><li><a href="global.html#getLegendsFromSVG">getLegendsFromSVG</a></li><li><a href="global.html#getSVG">getSVG</a></li><li><a href="global.html#getXaxisLabels">getXaxisLabels</a></li><li><a href="global.html#getXaxisText">getXaxisText</a></li><li><a href="global.html#getYaxisLabels">getYaxisLabels</a></li><li><a href="global.html#getYaxisText">getYaxisText</a></li><li><a href="global.html#isChartDisplayed">isChartDisplayed</a></li><li><a href="global.html#isElementPresent">isElementPresent</a></li><li><a href="global.html#setContianer">setContianer</a></li><li><a href="global.html#setElementManager">setElementManager</a></li><li><a href="global.html#setSVG">setSVG</a></li><li><a href="global.html#textToBePresentInElement">textToBePresentInElement</a></li><li><a href="global.html#textToBePresentInElementValue">textToBePresentInElementValue</a></li><li><a href="global.html#titleContains">titleContains</a></li><li><a href="global.html#titleIs">titleIs</a></li><li><a href="global.html#waitForAngular">waitForAngular</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jun 16 2016 13:54:33 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

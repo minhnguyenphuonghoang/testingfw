@@ -1,0 +1,146 @@
+{
+    "geSSOPage": {
+        "logo": {
+            "locatorType": "xpath",
+            "locatorValue": "/html/body/div[1]/div[1]/div/div[1]/img"
+        },
+        "username": {
+            "locatorType": "id",
+            "locatorValue": "username"
+        },
+        "password": {
+            "locatorType": "id",
+            "locatorValue": "password"
+        }
+    },
+
+    "loginPage": {
+        "username": {
+            "locatorType": "name",
+            "locatorValue": "username"
+        },
+        "password": {
+            "locatorType": "name",
+            "locatorValue": "password"
+        },
+        "signInButton": {
+            "locatorType": "css",
+            "locatorValue": ".island-button"
+        }
+    },
+    "landingPage": {
+        "assetTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Assets"
+        },
+
+        "analyticsCatalogTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Analytics Catalog"
+        },
+
+        "assetInstancesTab": {
+            "locatorType": "linkText",
+            "locatorValue": "Asset Instances"
+        },
+        "logoutArrow": {
+            "locatorType": "css",
+            "locatorValue": ".fa.fa-angle-up.pxh-login__caret-icon"
+        },
+        "logoutButton": {
+            "locatorType": "linkText",
+            "locatorValue": "Sign Out"
+        }
+    },
+    "assetTenantPage": {
+        "tenantName": {
+            "locatorType": "css",
+            "locatorValue": ".subtitle.style-scope.faceplate-detail"
+        },
+        "customerInfo": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='asset-table']/div[1]/div[1]/div"
+        },
+        "tagClassNameTableHeader": {
+            "locatorType": "cssArray",
+            "value": {
+                "locatorValue": ".column-header.style-scope.asset-data-table",
+                "index": 0
+            }
+        },
+        "test":{
+            "locatorType":"css",
+            "locatorValue":".fa.fa-caret-down.style-scope.px-context-browser"
+        },
+        "test2":{
+            "locatorType": "xpath",
+            "locatorValue":"//*[@id='null']"
+        },
+        "openButton":{
+            "locatorType": "xpath",
+            "locatorValue":"//*[@id='null']/button"
+        }
+    },
+    "wfvPage": {
+        "username": {
+            "locatorType": "id",
+            "locatorValue": "USER"
+        },
+        "password": {
+            "locatorType": "id",
+            "locatorValue": "PASSWORD"
+        },
+        "signInButton": {
+            "locatorType": "css",
+            "locatorValue": "table#entry tbody tr td input.Submit"
+        },
+        "geLogo": {
+            "locatorType": "css",
+            "locatorValue": "span.ge-logo"
+        },
+        "customer": {
+            "locatorType": "css",
+            "locatorValue": "#fleet_table > tbody > tr:nth-child(2) > td.sorting_1 > a"
+        },
+        "fleetTable": {
+            "locatorType": "id",
+            "locatorValue": "fleet_table"
+        },
+        "section": {
+            "locatorType": "id",
+            "locatorValue": "reliability"
+        },
+        "dashboardLink": {
+            "locatorType": "linkText",
+            "locatorValue": "Dashboard"
+        }
+    },
+    "angularjsHomepage": {
+        "logo": {
+            "locatorType": "xpath",
+            "locatorValue": "/html/body/div[1]/div[1]/div/div[1]/img"
+        },
+        "username": {
+            "locatorType": "id",
+            "locatorValue": "username"
+        },
+        "password": {
+            "locatorType": "id",
+            "locatorValue": "password"
+        }
+    },
+
+    "highChartsHomepage": {
+        "timeSeriesChart": {
+            "locatorType": "xpath",
+            "locatorValue": "//*[@id='demos']/div/div[2]/div[2]/a/div/div[1]/img"
+        }
+    },
+
+    "highChartsDemopage": {
+        "timeSeriesClicked": {
+            "locatorType": "id",
+            "locatorValue": "container"
+        }
+    }
+}
