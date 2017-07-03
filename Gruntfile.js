@@ -33,14 +33,20 @@ module.exports = function(grunt) {
             {
                 command:'npm config set strict-ssl false'
             },
+//            npm_install: {
+//                command: 'npm install --only=dev --proxy=http://proxy-src.research.ge.com:8080'
+//            },
             npm_install: {
-                command: 'npm install --only=dev --proxy=http://proxy-src.research.ge.com:8080'
+                command: 'npm install --only=dev'
             },
             // npm_update: {
             //     command: 'npm update --only=dev --proxy=http://proxy-src.research.ge.com:8080'
             // },
+//            protractor_install: {
+//                command: 'node ./node_modules/protractor/bin/webdriver-manager update --proxy=http://proxy-src.research.ge.com:8080 --ignore_ssl'
+//            },
             protractor_install: {
-                command: 'node ./node_modules/protractor/bin/webdriver-manager update --proxy=http://proxy-src.research.ge.com:8080 --ignore_ssl'
+                command: 'node ./node_modules/protractor/bin/webdriver-manager update --ignore_ssl'
             },
             // ie_install: {
             //     command: 'node ./node_modules/protractor/bin/webdriver-manager update --ie --proxy=http://proxy-src.research.ge.com:8080'
