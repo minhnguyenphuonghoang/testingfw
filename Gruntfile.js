@@ -1,7 +1,6 @@
 module.exports = function(grunt) {
     'use strict';
 
-
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -58,8 +57,9 @@ module.exports = function(grunt) {
             default: {
                 options: {
                     keepAlive: false,
-                    configFile: 'Common_Template/Conf/protractor.cucumber.common.conf.js',
-                    args: {suite: 'asset',
+                    configFile: 'AWB/Conf/protractor.cucumber.common.conf.js',
+                    args: {
+                        //suite: 'asset',
                         params:{"login": {
                         "baseUrl":grunt.option('baseUrl'),
                         "username":grunt.option('username'),
