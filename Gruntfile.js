@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
     'use strict';
 
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -35,15 +36,18 @@ module.exports = function(grunt) {
 //            npm_install: {
 //                command: 'npm install --only=dev --proxy=http://proxy-src.research.ge.com:8080'
 //            },
-            npm_install: {
-                command: 'npm install --only=dev'
-            },
-            // npm_update: {
-            //     command: 'npm update --only=dev --proxy=http://proxy-src.research.ge.com:8080'
-            // },
+//            npm_update: {
+//                command: 'npm update --only=dev --proxy=http://proxy-src.research.ge.com:8080'
+//            },
 //            protractor_install: {
 //                command: 'node ./node_modules/protractor/bin/webdriver-manager update --proxy=http://proxy-src.research.ge.com:8080 --ignore_ssl'
 //            },
+            npm_install: {
+                command: 'npm install --only=dev'
+            },
+            npm_update: {
+                command: 'npm update --only=dev'
+            },
             protractor_install: {
                 command: 'node ./node_modules/protractor/bin/webdriver-manager update --ignore_ssl'
             },
@@ -57,19 +61,15 @@ module.exports = function(grunt) {
             default: {
                 options: {
                     keepAlive: false,
-                    configFile: 'AWB/Conf/protractor.cucumber.common.conf.js',
-                    args: {
-                        //suite: 'asset',
+                    configFile: 'Common_Template/Conf/protractor.cucumber.common.conf.js',
+                    args: {suite: 'asset',
                         params:{"login": {
                         "baseUrl":grunt.option('baseUrl'),
                         "username":grunt.option('username'),
                         "password":grunt.option('password'),
                         "adminusername":grunt.option('adminusername'),
                         "adminpassword":grunt.option('adminpassword')
-
-
-                    }
-
+                        }
                     }}
                 },
             },

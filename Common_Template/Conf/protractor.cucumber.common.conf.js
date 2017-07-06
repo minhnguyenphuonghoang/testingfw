@@ -41,17 +41,17 @@ exports.config = {
 },
 
 	// Hooks running in the background
-	// plugins: [{
-	// 	path: '../../node_modules/proui-utils/Compressed_Utils/GeneralHook.js',
-	// }],
+	plugins: [{
+		path: '../../node_modules/proui-utils/Compressed_Utils/GeneralHook.js',
+	}],
 
 	capabilities: {
 		browserName: 'chrome',
-		proxy: {
-			proxyType: 'manual',
-			httpProxy: 'sjc1intproxy01.crd.ge.com:8080',
-			sslProxy: 'sjc1intproxy01.crd.ge.com:8080'
-		},
+//		proxy: {
+//			proxyType: 'manual',
+//			httpProxy: 'sjc1intproxy01.crd.ge.com:8080',
+//			sslProxy: 'sjc1intproxy01.crd.ge.com:8080'
+//		},
 		count: 1,
 		shardTestFiles: false,
 		maxInstances: 1,
